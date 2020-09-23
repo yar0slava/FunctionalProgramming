@@ -69,7 +69,7 @@ solve cd = solveAssist cd [] []
 
 solveAssist :: Code -> [Code] -> [Move] -> [Move]
 solveAssist cd [] [] = solveAssist cd (allCodes(lngth cd)) []
-solveAssist cd atts mvs = if bull(getMove cd (head atts))==4 then concatFr mvs [getMove cd (head atts)]
+solveAssist cd atts mvs = if bull(getMove cd (head atts))==(lngth cd) then concatFr mvs [getMove cd (head atts)]
  else solveAssist cd (filterCodes (getMove cd (head atts)) atts) (concatFr mvs [getMove cd (head atts)])
 
 concatFr :: [Move] -> [Move] -> [Move]
