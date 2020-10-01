@@ -13,17 +13,12 @@ edges g = [(x,y)| x<-nodes g, y<- g!!x]
 
 -- Задача 1 ------------------------------------
 isGraph :: Graph -> Bool 
-isGraph gr = not (containsDublicates (edges gr))
+isGraph gr = foldl1 (&&) [(isSet x)&&(containsOnly x (nodes gr)) | x <- gr]
 
-containsDublicates :: [(Int,Int)] -> Bool
-containsDublicates [] = False
-containsDublicates (s:xs) | hasDublicate xs s = True
-                          | otherwise = containsDublicates xs
-
-hasDublicate :: [(Int,Int)] -> (Int,Int) -> Bool
-hasDublicate [] _ = False
-hasDublicate (s:xs) y | s==y = True
-                      | otherwise = hasDublicate xs y
+containsOnly :: [Int] -> [Int] -> Bool
+containsOnly [] _ = True
+containsOnly _ [] = False
+containsOnly xs ys = foldl1 (&&) [elem x ys | x<-xs]
 
 -- Задача 2 ------------------------------------
 isTournament :: Graph -> Bool 
