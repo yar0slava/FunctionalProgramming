@@ -53,7 +53,7 @@ isConsistent (Move att f p) cd = (exactMatches cd att)==f && (matches cd att - e
 
 -- Завдання 6 -----------------------------------------
 filterCodes :: Move -> [Code] -> [Code]
-filterCodes mv cdx = [x| x <- cdx, isConsistent mv x]
+filterCodes mv cdx = [x | x <- cdx, isConsistent mv x]
 
 -- Завдання 7 -----------------------------------------
 allCodes :: Int -> [Code]
