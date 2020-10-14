@@ -71,7 +71,18 @@ allSeq (x:xs) = allSeq xs++[x:y | y <- allSeq xs, (head y) > x]
 
 -- Задача 6 -----------------------------------------
 genExpr ::  Int -> Int -> [String]
-genExpr = undefined
+genExpr x y = [fst p | p<-buildExpr(reverse(toList x)), snd p == y]
+
+buildExpr :: [Int] -> [(String, Int)]
+buildExpr [] = [([],0)]
+buildExpr [x] = [(show x, x)]
+buildExpr (x:xs) = [( fst(y)++('*':show x), (snd y)*x ) | y<-buildExpr xs]++
+                   [( fst(y)++('+':show x), (snd y)+x ) | y<-buildExpr xs]++
+                   [( fst(y)++('-':show x), (snd y)-x ) | y<-buildExpr xs]
+
+toList :: Int -> [Int]
+toList 0 = []
+toList x = toList (div x 10) ++ [mod x 10]
 
 -- Задача 7 -----------------------------------------
 genExprBracket ::  Int -> Int -> [String]
